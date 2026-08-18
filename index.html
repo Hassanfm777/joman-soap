@@ -4,85 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>متجر جُمان للصابون الطبيعي</title>
-    <!-- خطوط جوجل العربية (Tajawal) -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- ملف التصميم -->
-    <link rel="stylesheet" href="style.css">
-    <!-- كود تسجيل الدخول للوحة التحكم -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Tajawal', sans-serif; background-color: #faf9f6; color: #333; line-height: 1.6; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        
+        .navbar { background-color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 15px 0; }
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: #4a5d23; font-size: 22px; font-weight: 700; }
+        .navbar nav a { color: #555; text-decoration: none; margin-right: 15px; font-weight: 500; }
+        
+        .hero { background-color: #eef2e6; text-align: center; padding: 60px 20px; }
+        .hero h2 { font-size: 36px; color: #4a5d23; margin-bottom: 15px; }
+        .hero p { font-size: 16px; color: #666; max-width: 600px; margin: 0 auto 20px; }
+        
+        .products-section { padding: 40px 0; }
+        .section-title { text-align: center; font-size: 28px; color: #333; margin-bottom: 30px; }
+        
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        
+        .product-card { background-color: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: right; }
+        .product-image img { width: 100%; height: 200px; object-fit: cover; }
+        .product-info { padding: 15px; }
+        .product-info h3 { font-size: 18px; color: #333; margin-bottom: 8px; }
+        .product-info .description { font-size: 13px; color: #777; margin-bottom: 12px; height: 40px; overflow: hidden; }
+        .price { font-size: 18px; font-weight: 700; color: #d35400; }
+        
+        footer { background-color: #4a5d23; color: #fff; text-align: center; padding: 15px; margin-top: 30px; font-size: 14px; }
+    </style>
 </head>
 <body>
 
-    <!-- الشريط العلوي -->
     <header class="navbar">
         <div class="container">
             <h1 class="logo">جُمان للصابون الطبيعي</h1>
             <nav>
                 <a href="#">الرئيسية</a>
                 <a href="#shop">المنتجات</a>
-                <a href="#">تواصل معنا</a>
             </nav>
         </div>
     </header>
 
-    <!-- القسم الترحيبي (Hero) -->
     <section class="hero">
         <div class="hero-content">
             <h2>عناية طبيعية تليق ببشرتك</h2>
-            <p>نقدم لك تشكيلة من أفضل أنواع الصابون الطبيعي المصنوع يدوياً بكل حب وعناية، خالي من المواد الكيميائية الضارة.</p>
-            <a href="#shop" class="btn">تسوق الآن</a>
+            <p>تشكيلة من أفضل أنواع الصابون الطبيعي المصنوع يدوياً بكل حب وعناية.</p>
         </div>
     </section>
 
-    <!-- قسم المنتجات -->
     <section id="shop" class="products-section">
         <div class="container">
             <h2 class="section-title">أحدث منتجاتنا</h2>
-            
-            <!-- هنا سيتم عرض المنتجات تلقائياً من لوحة التحكم -->
             <div id="product-container" class="products-grid">
                 <p style="text-align: center; width: 100%;">جاري تحميل المنتجات...</p>
             </div>
-
         </div>
     </section>
 
-    <!-- الفوتر (أسفل الموقع) -->
     <footer>
         <p>جميع الحقوق محفوظة &copy; 2026 - متجر جُمان للصابون الطبيعي</p>
     </footer>
 
-    <!-- كود الجافاسكربت لجلب المنتجات من لوحة التحكم -->
     <script>
-        // سحب المنتجات من ملف JSON
         fetch('data/products.json')
             .then(response => response.json())
             .then(data => {
                 const container = document.getElementById('product-container');
-                container.innerHTML = ''; // مسح رسالة "جاري التحميل"
-
-                // ترتيب المنتجات الأحدث أولاً (اختياري)
-                data.products.reverse().forEach(product => {
-                    const productCard = `
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="${product.image}" alt="${product.name}">
-                            </div>
-                            <div class="product-info">
-                                <h3>${product.name}</h3>
-                                <p class="description">${product.description}</p>
-                                <div class="price-action">
-                                    <span class="price">${product.price} درهم</span>
+                container.innerHTML = '';
+                if(data.products) {
+                    data.products.reverse().forEach(product => {
+                        const productCard = `
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="${product.image}" alt="${product.name}">
+                                </div>
+                                <div class="product-info">
+                                    <h3>${product.name}</h3>
+                                    <p class="description">${product.description || ''}</p>
+                                    <div class="price">${product.price} درهم</div>
                                 </div>
                             </div>
-                        </div>
-                    `;
-                    container.innerHTML += productCard;
-                });
+                        `;
+                        container.innerHTML += productCard;
+                    });
+                }
             })
             .catch(error => {
                 console.error('Error loading products:', error);
-                document.getElementById('product-container').innerHTML = '<p>عذراً، حدث خطأ في تحميل المنتجات.</p>';
+                document.getElementById('product-container').innerHTML = '<p style="text-align:center;">عذراً، حدث خطأ في تحميل المنتجات.</p>';
             });
     </script>
 </body>
