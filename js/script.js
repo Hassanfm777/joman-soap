@@ -1,9 +1,6 @@
 /* ==========================================================
    إعدادات لازم تغيّريها
    ========================================================== */
-
-// رقم الواتساب اللي بدك الطلبات توصله (بصيغة دولية بدون + أو أصفار،
-// مثال للأردن: 9627xxxxxxxx)
 const WHATSAPP_NUMBER = "9627XXXXXXXX";
 
 /* ========================================================== */
@@ -16,57 +13,68 @@ function waLink(productName){
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
 }
 
-function renderProducts(){
-  PRODUCTS.forEach((p) => {
-    const card = document.createElement("article");
-    card.className = "soap-card";
+// الدالة الجديدة لجلب المنتجات من ملف JSON الخاص بلوحة التحكم
+async function fetchAndRenderProducts() {
+  try {
+    const response = await fetch('data/products.json');
+    const data = await response.json();
+    const productsArray = data.products || [];
 
-    const thumb = document.createElement("div");
-    thumb.className = "soap-thumb";
-    thumb.style.setProperty("--card-color", p.color || "#5C6B3F");
+    productsArray.forEach((p) => {
+      const card = document.createElement("article");
+      card.className = "soap-card";
 
-    if (p.image) {
-      const img = document.createElement("img");
-      img.src = p.image;
-      img.alt = p.name;
-      thumb.appendChild(img);
-    } else {
-      const stamp = document.createElement("span");
-      stamp.className = "thumb-stamp";
-      stamp.textContent = "ج";
-      thumb.appendChild(stamp);
-    }
+      const thumb = document.createElement("div");
+      thumb.className = "soap-thumb";
+      thumb.style.setProperty("--card-color", p.color || "#5C6B3F");
 
-    card.innerHTML = `
-      <h3></h3>
-      <p class="soap-desc"></p>
-      <div class="soap-meta">
-        <span class="soap-price"></span>
-      </div>
-    `;
-    card.querySelector("h3").textContent = p.name;
-    card.querySelector(".soap-desc").textContent = p.desc;
-    card.querySelector(".soap-price").textContent = p.price;
-    card.insertBefore(thumb, card.firstChild);
+      if (p.image) {
+        const img = document.createElement("img");
+        // معالجة المسار عشان لوحة التحكم
+        img.src = p.image.startsWith('images/') ? p.image : `images/${p.image.split('/').pop()}`;
+        img.alt = p.name;
+        thumb.appendChild(img);
+      } else {
+        const stamp = document.createElement("span");
+        stamp.className = "thumb-stamp";
+        stamp.textContent = "ج";
+        thumb.appendChild(stamp);
+      }
 
-    const orderBtn = document.createElement("a");
-    orderBtn.className = "soap-order-btn";
-    orderBtn.href = waLink(p.name);
-    orderBtn.target = "_blank";
-    orderBtn.rel = "noopener";
-    orderBtn.textContent = "اطلب عبر واتساب";
-    card.appendChild(orderBtn);
+      card.innerHTML = `
+        <h3></h3>
+        <p class="soap-desc"></p>
+        <div class="soap-meta">
+          <span class="soap-price"></span>
+        </div>
+      `;
+      card.querySelector("h3").textContent = p.name;
+      card.querySelector(".soap-desc").textContent = p.desc;
+      card.querySelector(".soap-price").textContent = p.price;
+      card.insertBefore(thumb, card.firstChild);
 
-    grid.appendChild(card);
+      const orderBtn = document.createElement("a");
+      orderBtn.className = "soap-order-btn";
+      orderBtn.href = waLink(p.name);
+      orderBtn.target = "_blank";
+      orderBtn.rel = "noopener";
+      orderBtn.textContent = "اطلب عبر واتساب";
+      card.appendChild(orderBtn);
 
-    const opt = document.createElement("option");
-    opt.value = p.name;
-    opt.textContent = p.name;
-    productSelect.appendChild(opt);
-  });
+      grid.appendChild(card);
+
+      const opt = document.createElement("option");
+      opt.value = p.name;
+      opt.textContent = p.name;
+      productSelect.appendChild(opt);
+    });
+  } catch (error) {
+    console.error("خطأ في جلب المنتجات:", error);
+  }
 }
 
-renderProducts();
+// تشغيل الدالة
+fetchAndRenderProducts();
 
 /* رابط واتساب في الفوتر */
 document.getElementById("footer-whatsapp").href = `https://wa.me/${WHATSAPP_NUMBER}`;
@@ -76,7 +84,6 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
 /* ==========================================================
    نموذج الطلب - يرسل عبر Formspree ويوصلك إشعار بالإيميل
-   لازم تستبدلي YOUR_FORM_ID في index.html برقم الفورم الحقيقي
    ========================================================== */
 const form = document.getElementById("order-form");
 const status = document.getElementById("form-status");
