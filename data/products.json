@@ -41,6 +41,13 @@
       "price": "3.5 دينار",
       "color": "#6FA37B",
       "image": ""
+    },
+    {
+      "color": "#7C8A57",
+      "name": "حسن منصور ",
+      "desc": "مصمم ولاعب رياضي ",
+      "price": "50 AED ",
+      "image": "images/untitled.png"
     }
   ]
 }
