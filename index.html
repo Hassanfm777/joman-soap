@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر جُمان للصابون الطبيعي</title>
+    <title>Neroli Soap | صابون طبيعي فاخر</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <style>
@@ -11,27 +11,45 @@
         body { font-family: 'Tajawal', sans-serif; background-color: #faf9f6; color: #333; line-height: 1.6; }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
         
-        .navbar { background-color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 15px 0; }
+        .navbar { background-color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 15px 0; position: sticky; top: 0; z-index: 100; }
         .navbar .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { color: #4a5d23; font-size: 22px; font-weight: 700; }
-        .navbar nav a { color: #555; text-decoration: none; margin-right: 15px; font-weight: 500; }
+        .logo { color: #4a5d23; font-size: 24px; font-weight: 700; }
         
+        .cart-btn { background-color: #4a5d23; color: #fff; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-family: 'Tajawal', sans-serif; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 5px; }
+        .cart-btn:hover { background-color: #3a4a1c; }
+
         .hero { background-color: #eef2e6; text-align: center; padding: 60px 20px; }
         .hero h2 { font-size: 36px; color: #4a5d23; margin-bottom: 15px; }
-        .hero p { font-size: 16px; color: #666; max-width: 600px; margin: 0 auto 20px; }
+        .hero p { font-size: 16px; color: #666; max-width: 600px; margin: 0 auto; }
         
         .products-section { padding: 40px 0; }
         .section-title { text-align: center; font-size: 28px; color: #333; margin-bottom: 30px; }
         
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
         
-        .product-card { background-color: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: right; }
+        .product-card { background-color: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; text-align: right; }
         .product-image img { width: 100%; height: 200px; object-fit: cover; }
         .product-info { padding: 15px; }
         .product-info h3 { font-size: 18px; color: #333; margin-bottom: 8px; }
         .product-info .description { font-size: 13px; color: #777; margin-bottom: 12px; height: 40px; overflow: hidden; }
+        .product-footer { display: flex; justify-content: space-between; align-items: center; padding: 0 15px 15px; }
         .price { font-size: 18px; font-weight: 700; color: #d35400; }
         
+        .add-to-cart { background-color: #4a5d23; color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-family: 'Tajawal'; font-size: 14px; transition: background 0.2s; }
+        .add-to-cart:hover { background-color: #3a4a1c; }
+
+        /* نافذة السلة الجانبية */
+        .cart-modal { position: fixed; top: 0; left: -100%; width: 100%; max-width: 400px; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 1000; transition: left 0.3s ease; display: flex; flex-direction: column; }
+        .cart-modal.open { left: 0; }
+        .cart-header { background: #4a5d23; color: #fff; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .close-cart { background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; }
+        .cart-body { padding: 20px; flex-grow: 1; overflow-y: auto; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .cart-footer { padding: 20px; background: #f9f9f9; border-top: 1px solid #eee; text-align: center; }
+        .whatsapp-checkout { background-color: #25d366; color: white; border: none; width: 100%; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: 'Tajawal'; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .whatsapp-checkout:hover { background-color: #1ebe5d; }
+        .remove-item { color: #e74c3c; background: none; border: none; cursor: pointer; font-size: 13px; }
+
         footer { background-color: #4a5d23; color: #fff; text-align: center; padding: 15px; margin-top: 30px; font-size: 14px; }
     </style>
 </head>
@@ -39,18 +57,15 @@
 
     <header class="navbar">
         <div class="container">
-            <h1 class="logo">جُمان للصابون الطبيعي</h1>
-            <nav>
-                <a href="#">الرئيسية</a>
-                <a href="#shop">المنتجات</a>
-            </nav>
+            <h1 class="logo">Neroli Soap</h1>
+            <button class="cart-btn" onclick="toggleCart()">🛒 سلة الشراء (<span id="cart-count">0</span>)</button>
         </div>
     </header>
 
     <section class="hero">
         <div class="hero-content">
-            <h2>عناية طبيعية تليق ببشرتك</h2>
-            <p>تشكيلة من أفضل أنواع الصابون الطبيعي المصنوع يدوياً بكل حب وعناية.</p>
+            <h2 id="site-title">عناية طبيعية تليق ببشرتك</h2>
+            <p id="site-desc">تشكيلة فاخرة من الصابون الطبيعي المصنوع يدوياً بكل حب.</p>
         </div>
     </section>
 
@@ -63,18 +78,48 @@
         </div>
     </section>
 
+    <!-- سلة الشراء الجانبية -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-header">
+            <h3>سلة المشتريات</h3>
+            <button class="close-cart" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-body" id="cart-items">
+            <p style="text-align: center; color: #777;">السلة فارغة حالياً</p>
+        </div>
+        <div class="cart-footer">
+            <div style="margin-bottom: 15px; font-weight: bold; font-size: 18px;">
+                المجموع الكلي: <span id="cart-total">0</span> درهم
+            </div>
+            <button class="whatsapp-checkout" onclick="checkoutWhatsApp()">إتمام الطلب عبر واتساب 📱</button>
+        </div>
+    </div>
+
     <footer>
-        <p>جميع الحقوق محفوظة &copy; 2026 - متجر جُمان للصابون الطبيعي</p>
+        <p>جميع الحقوق محفوظة &copy; 2026 - Neroli Soap</p>
     </footer>
 
     <script>
+        let cart = [];
+        let globalWhatsapp = "971500000000"; // رقم افتراضي يتم تحديثه من ملف الإعدادات
+
+        // جلب الإعدادات والمنتجات
         fetch('data/products.json')
             .then(response => response.json())
             .then(data => {
+                // إذا أضاف إعدادات عامة في ملف الـ JSON
+                if(data.settings && data.settings.whatsapp) {
+                    globalWhatsapp = data.settings.whatsapp;
+                }
+                if(data.settings && data.settings.title) {
+                    document.getElementById('site-title').innerText = data.settings.title;
+                }
+
                 const container = document.getElementById('product-container');
                 container.innerHTML = '';
-                if(data.products) {
-                    data.products.reverse().forEach(product => {
+                
+                if(data.products && data.products.length > 0) {
+                    data.products.reverse().forEach((product, index) => {
                         const productCard = `
                             <div class="product-card">
                                 <div class="product-image">
@@ -83,18 +128,81 @@
                                 <div class="product-info">
                                     <h3>${product.name}</h3>
                                     <p class="description">${product.description || ''}</p>
-                                    <div class="price">${product.price} درهم</div>
+                                </div>
+                                <div class="product-footer">
+                                    <span class="price">${product.price} درهم</span>
+                                    <button class="add-to-cart" onclick='addToCart(${JSON.stringify(product)})'>أضف للسلة</button>
                                 </div>
                             </div>
                         `;
                         container.innerHTML += productCard;
                     });
+                } else {
+                    container.innerHTML = '<p style="text-align:center;">لا توجد منتجات مضافة حالياً.</p>';
                 }
             })
             .catch(error => {
-                console.error('Error loading products:', error);
+                console.error('Error:', error);
                 document.getElementById('product-container').innerHTML = '<p style="text-align:center;">عذراً، حدث خطأ في تحميل المنتجات.</p>';
             });
+
+        function toggleCart() {
+            document.getElementById('cartModal').classList.toggle('open');
+        }
+
+        function addToCart(product) {
+            cart.push(product);
+            updateCartUI();
+            toggleCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            const itemsContainer = document.getElementById('cart-items');
+            itemsContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = '<p style="text-align: center; color: #777;">السلة فارغة حالياً</p>';
+                document.getElementById('cart-total').innerText = '0';
+                return;
+            }
+
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += Number(item.price);
+                itemsContainer.innerHTML += `
+                    <div class="cart-item">
+                        <div>
+                            <h4>${item.name}</h4>
+                            <span style="color: #d35400; font-weight: bold;">${item.price} درهم</span>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart(${index})">حذف</button>
+                    </div>
+                `;
+            });
+            document.getElementById('cart-total').innerText = total;
+        }
+
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert('السلة فارغة!');
+                return;
+            }
+            let message = "مرحباً، أرغب في طلب المنتجات التالية من متجر Neroli Soap:%0A";
+            let total = 0;
+            cart.forEach((item, index) => {
+                message += `%0A${index + 1}. ${item.name} - ${item.price} درهم`;
+                total += Number(item.price);
+            });
+            message += `%0A%0A*المجموع الكلي: ${total} درهم*`;
+
+            window.open(`https://wa.me/${globalWhatsapp}?text=${message}`, '_blank');
+        }
     </script>
 </body>
 </html>
