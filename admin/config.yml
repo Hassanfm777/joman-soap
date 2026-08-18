@@ -1,0 +1,24 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "images"
+
+collections:
+  - name: "store"
+    label: "إدارة المتجر"
+    files:
+      - label: "قائمة المنتجات"
+        name: "products_list"
+        file: "data/products.json"
+        fields:
+          - label: "المنتجات"
+            name: "products"
+            widget: "list"
+            fields:
+              - {label: "اسم المنتج", name: "name", widget: "string"}
+              - {label: "وصف المنتج", name: "desc", widget: "text"}
+              - {label: "السعر", name: "price", widget: "string"}
+              - {label: "صورة المنتج", name: "image", widget: "image", required: false}
+              - {label: "لون الخلفية", name: "color", widget: "color", default: "#7C8A57"}
