@@ -1,60 +1,490 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <meta name="theme-color" content="#344628">
-  <meta name="description" content="صابون طبيعي فاخر مصنوع يدويًا بعناية.">
+  <meta name="description" content="Neroli Soap - صابون طبيعي فاخر مصنوع يدويًا.">
+
   <title>Neroli Soap | صابون طبيعي فاخر</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/style.css">
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
+
 <body>
-  <div class="announcement"><span>✦</span> شحن مجاني للطلبات فوق 150 <span>·</span> عناية نباتية بإيقاع أهدأ</div>
-  <header class="navbar">
-    <div class="container nav-inner">
-      <a class="brand" href="#top" aria-label="Neroli Soap"><span class="brand-seal">N</span><span><strong>Neroli</strong><small>SOAP / طقوس طبيعية</small></span></a>
-      <nav class="nav-links" aria-label="التنقل الرئيسي"><a href="#shop">المتجر</a><a href="#story">قصتنا</a><a href="#order">اطلب الآن</a></nav>
-      <button class="cart-btn" type="button" onclick="toggleCart()"><span>السلة</span><b>0</b><span aria-hidden="true">⌑</span></button>
+
+<!-- ANNOUNCEMENT -->
+<div class="announcement">
+  <span>✦</span>
+  شحن مجاني للطلبات فوق 150 د.إ
+  <span>·</span>
+  عناية نباتية بإيقاع أهدأ
+</div>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="container nav-inner">
+
+    <a class="brand" href="#top">
+      <span class="brand-seal">N</span>
+
+      <span class="brand-text">
+        <strong>Neroli</strong>
+        <small>SOAP / طقوس طبيعية</small>
+      </span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#shop">المتجر</a>
+      <a href="#story">قصتنا</a>
+      <a href="#why">لماذا نحن؟</a>
+      <a href="#order">اطلب الآن</a>
+    </nav>
+
+    <button class="cart-btn" onclick="toggleCart()">
+      السلة
+      <b id="cart-count">0</b>
+      <span>🛒</span>
+    </button>
+
+  </div>
+</header>
+
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero container">
+
+  <div class="hero-copy">
+
+    <p class="eyebrow">
+      <span></span>
+      عناية نباتية، بإيقاع أبطأ
+    </p>
+
+    <h1>
+      طقس صغير…
+      <br>
+      <em>يغيّر يومك.</em>
+    </h1>
+
+    <p class="hero-description">
+      صابون طبيعي فاخر يُصنع يدويًا من زيوت نباتية مختارة،
+      بروائح مستوحاة من حدائق النيرولي.
+      تجربة بسيطة لبشرة تشعر بالفرق.
+    </p>
+
+    <div class="hero-actions">
+
+      <a href="#shop" class="primary-action">
+        استكشف المجموعة
+        <span>←</span>
+      </a>
+
+      <a href="#story" class="text-action">
+        لماذا Neroli؟
+        <span>‹</span>
+      </a>
+
     </div>
-  </header>
 
-  <main id="top">
-    <section class="hero container">
-      <div class="hero-copy">
-        <p class="eyebrow"><span></span> عناية نباتية، بإيقاع أبطأ</p>
-        <h1 id="site-title">طقس صغير…<br><em>يغيّر يومك.</em></h1>
-        <p id="site-desc">صابون طبيعي فاخر يُصنع يدويًا من زيوت مختارة وروائح مستوحاة من حدائق النيرولي. لبشرة تشعر بالفرق، ورفّ يبدو أجمل.</p>
-        <div class="hero-actions"><a class="primary-action" href="#shop">استكشف المجموعة <span>←</span></a><a class="text-action" href="#story">لماذا Neroli؟ <span>‹</span></a></div>
-        <div class="hero-notes"><span>✓ مكونات نباتية</span><span>✓ بدون تجارب على الحيوانات</span></div>
+    <div class="hero-notes">
+      <span>✓ مكونات نباتية</span>
+      <span>✓ صناعة يدوية</span>
+      <span>✓ بدون تجارب على الحيوانات</span>
+    </div>
+
+  </div>
+
+
+  <!-- 3D PRODUCT -->
+  <div class="hero-art">
+
+    <div class="hero-glow"></div>
+
+    <div class="floating-leaf leaf-a">🌿</div>
+    <div class="floating-leaf leaf-b">🌿</div>
+
+    <div class="soap-3d">
+
+      <div class="soap-top">
+        <span>N</span>
+        <small>NEROLI</small>
       </div>
-      <div class="hero-art" aria-label="صابون طبيعي فاخر">
-        <div class="halo"></div><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
-        <div class="hero-product"><div class="soap-shape"><span>N</span></div><div class="leaf leaf-one"></div><div class="leaf leaf-two"></div></div>
-        <div class="hero-tag">Olive + Neroli<small>زيتون · زهر البرتقال</small></div>
-        <span class="art-label">DAILY RITUAL / 01</span>
+
+      <div class="soap-side"></div>
+
+    </div>
+
+    <div class="hero-shadow"></div>
+
+    <div class="hero-tag">
+      Olive + Neroli
+      <small>زيتون · زهر البرتقال</small>
+    </div>
+
+    <span class="art-label">
+      DAILY RITUAL / 01
+    </span>
+
+  </div>
+
+</section>
+
+
+<!-- TRUST -->
+<section class="trust-strip">
+
+  <div class="container trust-inner">
+
+    <span>مصنوع يدويًا</span>
+    <i></i>
+
+    <span>زيوت نباتية نقية</span>
+    <i></i>
+
+    <span>تغليف قابل لإعادة التدوير</span>
+    <i></i>
+
+    <span>توصيل داخل الإمارات</span>
+
+  </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+<section id="shop" class="products-section container">
+
+  <div class="section-heading">
+
+    <div>
+
+      <p class="eyebrow">
+        <span></span>
+        المجموعة المختارة
+      </p>
+
+      <h2>
+        منتجات بسيطة،
+        <br>
+        <em>مصنوعة بإتقان.</em>
+      </h2>
+
+    </div>
+
+    <p>
+      اكتشف مجموعة Neroli المختارة بعناية،
+      المصممة لتحويل العناية اليومية إلى طقس تحبه.
+    </p>
+
+  </div>
+
+
+  <div id="product-grid" class="products-grid"></div>
+
+</section>
+
+
+<!-- WHY -->
+<section id="why" class="why-section">
+
+  <div class="container">
+
+    <div class="center-heading">
+
+      <p class="eyebrow">
+        <span></span>
+        لماذا Neroli؟
+      </p>
+
+      <h2>
+        أقل تعقيدًا،
+        <em>أكثر جمالًا.</em>
+      </h2>
+
+    </div>
+
+
+    <div class="why-grid">
+
+      <div class="why-card">
+        <div class="why-icon">🌿</div>
+        <h3>مكونات نباتية</h3>
+        <p>
+          نختار مكونات نباتية بسيطة ونمنحها الوقت
+          لتظهر جودتها الطبيعية.
+        </p>
       </div>
-    </section>
 
-    <section class="trust-strip"><div class="container trust-inner"><span>مصنوع يدويًا</span><i></i><span>زيوت نباتية نقية</span><i></i><span>تغليف قابل لإعادة التدوير</span><i></i><span>توصيل داخل الإمارات</span></div></section>
 
-    <section id="shop" class="products-section container">
-      <div class="section-heading"><div><p class="eyebrow"><span></span> المجموعة المختارة</p><h2>أشياء بسيطة،<br><em>مصنوعة بإتقان.</em></h2></div><p>كل قطعة تبدأ من مكوّن صادق وتنتهي بتفصيل صغير يجعل روتينك اليومي أكثر لطفًا.</p></div>
-      <div id="product-grid" class="products-grid"><p class="loading">جاري تحميل المنتجات...</p></div>
-    </section>
+      <div class="why-card">
+        <div class="why-icon">✋</div>
+        <h3>صناعة يدوية</h3>
+        <p>
+          كل قطعة يتم التعامل معها بعناية،
+          من الخلط حتى التغليف.
+        </p>
+      </div>
 
-    <section id="story" class="story-section"><div class="story-seal">N</div><div class="container story-inner"><div><p class="eyebrow"><span></span> فلسفة Neroli</p><h2>الجمال ليس في<br><em>كثرة الأشياء.</em></h2></div><p>نختار عددًا قليلًا من المكونات، نمنحها وقتها، ثم نضعها بين يديك كما نحب أن تصل إلينا: واضحة، دافئة، وبدون مبالغة.</p></div></section>
 
-    <section id="order" class="order-section container"><div class="order-panel"><div><p class="eyebrow"><span></span> اطلب بهدوء</p><h2>خلّي العناية<br><em>لحظة تحبّها.</em></h2><p>اترك بياناتك وسنتواصل معك لتأكيد المنتج والتوصيل، أو اطلب مباشرة عبر واتساب.</p></div><form id="order-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST"><label for="name">الاسم</label><input id="name" name="name" required placeholder="اكتب اسمك"><label for="phone">رقم الهاتف</label><input id="phone" name="phone" required placeholder="07xxxxxxxx"><label for="product">المنتج</label><select id="product" name="product" required><option value="">اختر المنتج</option></select><label for="message">ملاحظة</label><textarea id="message" name="message" rows="3" placeholder="وقت مناسب للتواصل أو تفاصيل التوصيل"></textarea><button class="submit-btn" type="submit">إرسال الطلب <span>←</span></button><p id="form-status" role="status"></p></form></div></section>
-  </main>
+      <div class="why-card">
+        <div class="why-icon">♻</div>
+        <h3>تغليف مسؤول</h3>
+        <p>
+          نحرص على أن يكون التغليف بسيطًا
+          وقابلًا لإعادة التدوير.
+        </p>
+      </div>
 
-  <div id="cartModal" class="cart-modal" aria-hidden="true"><div class="cart-header"><h3>سلة المشتريات</h3><button class="close-cart" type="button" onclick="toggleCart()">×</button></div><div class="cart-body" id="cart-items"><p class="cart-empty">السلة فارغة حاليًا</p></div><div class="cart-footer"><div class="cart-total-row">المجموع <strong><span id="cart-total">0</span> د.إ</strong></div><button class="whatsapp-checkout" type="button" onclick="checkoutWhatsApp()">إتمام الطلب عبر واتساب <span>↗</span></button></div></div>
-  <div id="cartBackdrop" class="cart-backdrop" onclick="toggleCart()"></div>
 
-  <footer><div class="container footer-inner"><a class="brand" href="#top"><span class="brand-seal">N</span><span><strong>Neroli</strong><small>SOAP / طقوس طبيعية</small></span></a><p>لأن العناية اليومية تستحق أن تكون لحظة تحبها.</p><a id="footer-whatsapp" href="#" target="_blank" rel="noopener">واتساب: +971 56 672 4259</a></div><div class="container footer-bottom">© <span id="year"></span> Neroli Soap <span>جميع الحقوق محفوظة</span></div></footer>
-  <script src="js/script.js"></script>
+      <div class="why-card">
+        <div class="why-icon">♡</div>
+        <h3>طقس يومي</h3>
+        <p>
+          لأن العناية اليومية لا تحتاج إلى التعقيد
+          حتى تكون لحظة جميلة.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- STORY -->
+<section id="story" class="story-section">
+
+  <div class="story-seal">N</div>
+
+  <div class="container story-inner">
+
+    <div>
+
+      <p class="eyebrow">
+        <span></span>
+        فلسفة Neroli
+      </p>
+
+      <h2>
+        الجمال ليس في
+        <br>
+        <em>كثرة الأشياء.</em>
+      </h2>
+
+    </div>
+
+    <p>
+      نختار عددًا قليلًا من المكونات، نمنحها وقتها،
+      ثم نضعها بين يديك كما نحب أن تصل إلينا:
+      واضحة، دافئة، وبدون مبالغة.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- ORDER -->
+<section id="order" class="order-section container">
+
+  <div class="order-panel">
+
+    <div class="order-info">
+
+      <p class="eyebrow">
+        <span></span>
+        اطلب بهدوء
+      </p>
+
+      <h2>
+        خلّي العناية
+        <br>
+        <em>لحظة تحبّها.</em>
+      </h2>
+
+      <p>
+        اختر المنتج والكمية، ثم أرسل طلبك مباشرة
+        عبر WhatsApp وسنتواصل معك لتأكيد التفاصيل.
+      </p>
+
+      <a
+        class="direct-whatsapp"
+        href="https://wa.me/971566724259"
+        target="_blank"
+      >
+        تواصل معنا عبر WhatsApp
+        <span>↗</span>
+      </a>
+
+    </div>
+
+
+    <form id="order-form">
+
+      <label for="name">الاسم</label>
+      <input
+        id="name"
+        type="text"
+        placeholder="اكتب اسمك"
+        required
+      >
+
+      <label for="phone">رقم الهاتف</label>
+      <input
+        id="phone"
+        type="tel"
+        placeholder="05xxxxxxxx"
+        required
+      >
+
+      <label for="product">المنتج</label>
+
+      <select id="product" required>
+        <option value="">اختر المنتج</option>
+      </select>
+
+      <label for="quantity">الكمية</label>
+
+      <input
+        id="quantity"
+        type="number"
+        min="1"
+        value="1"
+        required
+      >
+
+      <label for="message">ملاحظة</label>
+
+      <textarea
+        id="message"
+        rows="3"
+        placeholder="تفاصيل التوصيل أو ملاحظة..."
+      ></textarea>
+
+      <button class="submit-btn" type="submit">
+        إرسال الطلب عبر WhatsApp
+        <span>←</span>
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- CART -->
+<div id="cartBackdrop" class="cart-backdrop" onclick="toggleCart()"></div>
+
+<aside id="cartModal" class="cart-modal">
+
+  <div class="cart-header">
+
+    <div>
+      <small>NEROLI SOAP</small>
+      <h3>سلة المشتريات</h3>
+    </div>
+
+    <button onclick="toggleCart()">×</button>
+
+  </div>
+
+
+  <div id="cart-items" class="cart-body">
+
+    <div class="cart-empty">
+      <div>🛒</div>
+      <p>السلة فارغة حاليًا</p>
+      <a href="#shop" onclick="toggleCart()">
+        اكتشف المنتجات
+      </a>
+    </div>
+
+  </div>
+
+
+  <div class="cart-footer">
+
+    <div class="cart-total-row">
+      <span>المجموع</span>
+
+      <strong>
+        <span id="cart-total">0</span>
+        د.إ
+      </strong>
+    </div>
+
+    <button
+      class="whatsapp-checkout"
+      onclick="checkoutWhatsApp()"
+    >
+      إتمام الطلب عبر WhatsApp
+      <span>↗</span>
+    </button>
+
+  </div>
+
+</aside>
+
+
+<!-- FOOTER -->
+<footer>
+
+  <div class="container footer-inner">
+
+    <a class="brand" href="#top">
+
+      <span class="brand-seal">N</span>
+
+      <span class="brand-text">
+        <strong>Neroli</strong>
+        <small>SOAP / طقوس طبيعية</small>
+      </span>
+
+    </a>
+
+    <p>
+      لأن العناية اليومية تستحق أن تكون لحظة تحبها.
+    </p>
+
+    <a
+      href="https://wa.me/971566724259"
+      target="_blank"
+      class="footer-whatsapp"
+    >
+      WhatsApp: +971 56 672 4259
+    </a>
+
+  </div>
+
+
+  <div class="container footer-bottom">
+
+    © <span id="year"></span>
+    Neroli Soap
+
+    <span>
+      جميع الحقوق محفوظة
+    </span>
+
+  </div>
+
+</footer>
+
+
+<script src="js/script.js"></script>
+
 </body>
 </html>
